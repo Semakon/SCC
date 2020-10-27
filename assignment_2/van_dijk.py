@@ -33,7 +33,8 @@ class VanDijk:
         pass
 
     def eval(self, pk, P, c):
-        pass
+        c_prime = P(c)
+        return c_prime % pk[0]
 
     def dec(self, sk, c):
         pass
