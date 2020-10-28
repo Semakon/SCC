@@ -1,5 +1,7 @@
 import random
 
+import math
+
 
 class VanDijk:
 
@@ -43,19 +45,40 @@ class VanDijk:
             sum_x_i += pk[i]
         print("sum", sum_x_i)
 
-        return (m + (2 * r) + (2 * sum_x_i)) % pk[0]
+        return self.mod((m + (2 * r) + (2 * sum_x_i)), pk[0])
 
     def eval(self, pk, P, c):
         c_prime = P(c)
-        return c_prime % pk[0]
+        return self.mod(c_prime, pk[0])
 
     def dec(self, sk, c):
-        return (c % sk) % 2
+        return self.mod(self.mod(c, sk), 2)
 
     def __D__(self, p):
         q = random.randrange(0, int((2**self.gamma) / p))
         r = random.randrange(-(2**self.rho) + 1, 2**self.rho)
         return (p * q) + r
+
+    def mod(self, z, p):
+        return z - (self.qp(z, p) * p)
+
+    def qp(self, z, p):
+        return self.round(z / p)
+
+    def round(self, a):
+        if a > 0:
+            # Positive number
+            if a - math.floor(a) > 0.5:
+                return math.ceil(a)
+            else:
+                return math.floor(a)
+        else:
+            # Negative number
+            if a - math.ceil(a) > -0.5:
+                return math.ceil(a)
+            else:
+                return math.floor(a)
+
 
 
 if __name__ == "__main__":

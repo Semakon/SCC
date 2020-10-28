@@ -1,3 +1,5 @@
+import math
+
 from assignment_2.van_dijk import VanDijk
 
 
@@ -7,7 +9,7 @@ sk, pk = test.key_gen()
 print("sk", sk)
 print("pk", pk)
 
-plaintext = [1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1]
+plaintext = [1, 0]
 ciphertext = []
 for m in plaintext:
     ciphertext.append(test.enc(pk, m))
@@ -19,3 +21,4 @@ for c in ciphertext:
 print(plaintext)
 print(ciphertext)
 print(decrypted)
+
