@@ -1,3 +1,4 @@
+import math
 import random
 
 
@@ -42,14 +43,14 @@ class VanDijk:
         for i in s:
             sum_x_i += pk[i]
 
-        return (m + 2 * r + 2 * sum_x_i) % pk[0]
+        return mod(m + 2 * r + 2 * sum_x_i, pk[0])
 
     def eval(self, pk, P, c):
         c_prime = P(c)
-        return c_prime % pk[0]
+        return mod(c_prime, pk[0])
 
     def dec(self, sk, c):
-        return (c % sk) % 2
+        return mod(c, sk) % 2
 
     def __D__(self, p):
         q = random.randrange(0, int((2**self.gamma) / p))
@@ -57,5 +58,33 @@ class VanDijk:
         return (p * q) + r
 
 
-test = VanDijk(100, 1000, 10, 10)
-print(test.key_gen())
+def quot(z, p):
+    q, r = divmod(z, p)
+    return q + round(r / p)
+
+
+def mod(z, p):
+    return z - quot(z, p) * p
+
+
+# test = VanDijk(eta=100, gamma=1000, rho=10, tau=10)
+#
+# sk, pk = test.key_gen()
+# plaintext = [1, 0, 1, 0]
+# ciphertext = []
+#
+# for m in plaintext:
+#     c = test.enc(pk, m)
+#     ciphertext.append(c)
+#     print(f'enc({m}): {c}')
+#
+# print(f'ciphertext: {ciphertext}')
+#
+# decrypted = []
+#
+# for c in ciphertext:
+#     m = test.dec(sk, c)
+#     decrypted.append(m)
+#     print(f'dec({sk}, {c}): {m}')
+#
+# print(f'decrypted: {decrypted}')
