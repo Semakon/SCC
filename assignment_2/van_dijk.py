@@ -42,7 +42,7 @@ class VanDijk:
         for i in s:
             sum_x_i += pk[i]
 
-        return m + 2 * r + 2 * sum_x_i % pk[0]
+        return (m + 2 * r + 2 * sum_x_i) % pk[0]
 
     def eval(self, pk, P, c):
         c_prime = P(c)
