@@ -34,7 +34,7 @@ class VanDijk:
         s = random.sample(range(1, self.tau + 1), random.randint(1, self.tau))
 
         # Sample a random int r <- (-2^(2_p), 2^(2_p))
-        r = random.randint((-(2 ** (2 * self.rho))), (2 ** (2 * self.rho)))
+        r = random.randint((-(2 ** (2 * self.rho))) + 1, (2 ** (2 * self.rho)) - 1)
 
         # Output c = (m + 2r + 2 \sum_{i \in S}(x_i))
         sum_x_i = 0
@@ -42,7 +42,7 @@ class VanDijk:
         for i in s:
             sum_x_i += pk[i]
 
-        return m + 2 * r + 2 * sum_x_i
+        return m + 2 * r + 2 * sum_x_i % pk[0]
 
     def eval(self, pk, P, c):
         c_prime = P(c)
