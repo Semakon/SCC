@@ -1,4 +1,3 @@
-import math
 import random
 
 
@@ -65,26 +64,3 @@ def quot(z, p):
 
 def mod(z, p):
     return z - quot(z, p) * p
-
-
-# test = VanDijk(eta=100, gamma=1000, rho=10, tau=10)
-#
-# sk, pk = test.key_gen()
-# plaintext = [1, 0, 1, 0]
-# ciphertext = []
-#
-# for m in plaintext:
-#     c = test.enc(pk, m)
-#     ciphertext.append(c)
-#     print(f'enc({m}): {c}')
-#
-# print(f'ciphertext: {ciphertext}')
-#
-# decrypted = []
-#
-# for c in ciphertext:
-#     m = test.dec(sk, c)
-#     decrypted.append(m)
-#     print(f'dec({sk}, {c}): {m}')
-#
-# print(f'decrypted: {decrypted}')

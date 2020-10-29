@@ -1,24 +1,13 @@
-import math
+import json
 
-from assignment_2.van_dijk import VanDijk
+with open('json_files/swhe-task2.json') as f:
+    data = json.load(f)
 
+print(data)
 
-test = VanDijk(8, 12, 10, 10)
-sk, pk = test.key_gen()
+ciphertext = {
+    'Ciphertext Vector': [0, 1, 0, 1, 0, 1]
+}
 
-print("sk", sk)
-print("pk", pk)
-
-plaintext = [1, 0]
-ciphertext = []
-for m in plaintext:
-    ciphertext.append(test.enc(pk, m))
-
-decrypted = []
-for c in ciphertext:
-    decrypted.append(test.dec(sk, c))
-
-print(plaintext)
-print(ciphertext)
-print(decrypted)
-
+data.update(ciphertext)
+print(data)
