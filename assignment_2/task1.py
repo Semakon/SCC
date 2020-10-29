@@ -36,7 +36,7 @@ cipherdict = {
     'Encrypted Vector': ciphertext
 }
 data.update(cipherdict)
-print(data)
+
 # Write ciphertext to file
 with open('json_files/swhe-task1-done.json', 'w') as f:
     json.dump(data, f, indent=2)

@@ -44,12 +44,12 @@ class VanDijk:
 
         return mod(m + 2 * r + 2 * sum_x_i, pk[0])
 
-    def eval(self, pk, P, c):
-        c_prime = P(c)
+    def eval(self, pk, P, *c):
+        c_prime = P(*c)
         return mod(c_prime, pk[0])
 
     def dec(self, sk, c):
-        return mod(c, sk) % 2
+        return mod(mod(c, sk), 2)
 
     def __D__(self, p):
         q = random.randrange(0, int((2**self.gamma) / p))
