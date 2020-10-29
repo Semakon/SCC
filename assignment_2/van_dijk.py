@@ -44,8 +44,8 @@ class VanDijk:
 
         return mod(m + 2 * r + 2 * sum_x_i, pk[0])
 
-    def eval(self, pk, P, *c):
-        c_prime = P(*c)
+    def eval(self, pk, P, c):
+        c_prime = P(c)
         return mod(c_prime, pk[0])
 
     def dec(self, sk, c):
