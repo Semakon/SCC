@@ -61,6 +61,11 @@ hamming = [task3.enc(pk, 0)]
 for b in xor:
     hamming = adder(hamming, b, task3, pk)
 
+# The vectors v1 and v2 are of length 10, so the Hamming Distance is at most
+# of size 10 as well. That can be encoded with 4 bits, so take only the 4
+# least significant bits as answer.
+hamming = hamming[-4:]
+
 # Turn Hamming distance into dictionary and add it to json data
 hammingdict = {
     "Encrypted Hamming Distance": hamming
