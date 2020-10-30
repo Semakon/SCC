@@ -50,7 +50,7 @@ v2 = [int(i) for i in data['Ciphertext Collection']["Encrypted V2"]]
 # Instantiate Van Dijk algorithm
 task3 = VanDijk(eta, gamma, rho, tau)
 
-# Calculate Hammaing Distance
+# Calculate Hamming Distance
 # First, XOR v1 and v2
 xor = []
 for i in range(len(v1)):

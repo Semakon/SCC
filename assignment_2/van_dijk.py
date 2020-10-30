@@ -16,7 +16,7 @@ class VanDijk:
             p = random.randint(2**(self.eta - 1), (2**self.eta) - 1)
 
         # Generate public key
-        q0 = random.randrange(0, int((2**self.gamma) / p))
+        q0 = random.randrange(0, (2**self.gamma) // p)
         x0 = p * q0
         pk = [x0]
         for i in range(1, self.tau + 1):
@@ -52,7 +52,7 @@ class VanDijk:
         return mod(mod(c, sk), 2)
 
     def __D__(self, p):
-        q = random.randrange(0, int((2**self.gamma) / p))
+        q = random.randrange(0, (2**self.gamma) // p)
         r = random.randrange(-(2**self.rho) + 1, 2**self.rho)
         return (p * q) + r
 
