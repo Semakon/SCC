@@ -17,33 +17,34 @@ def AND(cipher):
     return cipher_prod
 
 
+def add(x, y):
+    while y != 0:
+        carry = x & y
+        x = x ^ y
+        y = carry << 1
+    return x
+
+
+def add_bits(x: list, y: int):
+    result = []
+    carry = y
+    for i in range(len(x) - 1, -1, -1):
+        result.insert(0, x[i] ^ carry)
+        carry = x[i] & carry
+    result.insert(0, carry)
+    return result
+
+
 test = VanDijk(100, 1000, 10, 10)
 sk, pk = test.key_gen()
 
-size = 10
-c0 = []
-c1 = []
-for i in range(size):
-    c0.append(test.enc(pk, 0))
-    c1.append(test.enc(pk, 1))
+plain = [1, 0, 1, 0, 1, 0, 1]
+cipher = []
+for p in plain:
+    cipher.append(test.enc(pk, p))
 
-xor00 = test.eval(pk, XOR, [c0[random.randrange(0, size)], c0[random.randrange(0, size)]])
-xor01 = test.eval(pk, XOR, [c0[random.randrange(0, size)], c1[random.randrange(0, size)]])
-xor10 = test.eval(pk, XOR, [c1[random.randrange(0, size)], c0[random.randrange(0, size)]])
-xor11 = test.eval(pk, XOR, [c1[random.randrange(0, size)], c1[random.randrange(0, size)]])
-print("XOR:")
-print(test.dec(sk, xor00))
-print(test.dec(sk, xor01))
-print(test.dec(sk, xor10))
-print(test.dec(sk, xor11))
-
-and00 = test.eval(pk, AND, [c0[random.randrange(0, size)], c0[random.randrange(0, size)]])
-and01 = test.eval(pk, AND, [c0[random.randrange(0, size)], c1[random.randrange(0, size)]])
-and10 = test.eval(pk, AND, [c1[random.randrange(0, size)], c0[random.randrange(0, size)]])
-and11 = test.eval(pk, AND, [c1[random.randrange(0, size)], c1[random.randrange(0, size)]])
-print("\nAND:")
-print(test.dec(sk, and00))
-print(test.dec(sk, and01))
-print(test.dec(sk, and10))
-print(test.dec(sk, and11))
-
+x = [1, 1, 1, 1, 1]
+y = 1
+print(x)
+print(y)
+print(add_bits(x, y))
